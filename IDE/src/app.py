@@ -12,7 +12,6 @@ from terminal import Terminal
 class KingdomIDE(QMainWindow):
     def __init__(self, work_root_path=None):
         super().__init__()
-        
         self.setWindowTitle("Kingdom IDE")
         self.resize(1200, 800)
         
@@ -54,6 +53,7 @@ class KingdomIDE(QMainWindow):
         self.terminal = Terminal()
         terminal_dock = QDockWidget("Terminal", self)
         terminal_dock.setWidget(self.terminal)
+        terminal_dock.setFixedHeight(200)
         self.addDockWidget(Qt.BottomDockWidgetArea, terminal_dock)
         
         settings = QSettings("KingdomIDE", "Terminal")
@@ -167,12 +167,11 @@ class KingdomIDE(QMainWindow):
             if self.file_explorer:
                 self.file_explorer.set_root_path(new_dir)
             self.statusBar().showMessage(f"Diretório alterado para: {new_dir}")
+            
     def execute_file(self, file_path):
-        """Executa o arquivo no terminal integrado"""
         try:
             file_ext = os.path.splitext(file_path)[1].lower()
             
-            # Mapeamento de comandos por extensão
             commands = {
                 '.bat': f'cmd /c "{file_path}"',
                 '.vbs': f'wscript "{file_path}"',

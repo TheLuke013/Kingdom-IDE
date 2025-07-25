@@ -148,7 +148,7 @@ class Terminal(QPlainTextEdit):
         """Executa um comando no terminal"""
         if command:  # Se receber um comando externo
             self.process.write(f"{command}\r\n".encode())
-        elif self.pending_command:  # Comando digitado pelo usuário
+        elif self.pending_command:  # Comando digitado pelo usu√°rio
             cmd = self.pending_command.strip()
             self.history.append(cmd)
             self.history_index = len(self.history)

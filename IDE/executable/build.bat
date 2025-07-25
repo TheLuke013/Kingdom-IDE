@@ -1,7 +1,7 @@
 @echo off
 echo Compilando..
 
-set TARGET="build/Kingdom IDE.exe"
+set TARGET=build/Kingdom IDE.exe
 set ICON=resources/icon.ico
 
 rmdir /s /q build 2>nul
@@ -9,17 +9,17 @@ mkdir build 2>nul
 
 windres resources.rc -O coff -o build/resources.res
 
-g++ -o %TARGET% src/main.cpp build/resources.res ^
-    -lgdi32 -limm32 -luser32 -lkernel32 -ldwmapi -ld3d9 ^
+g++ -o "%TARGET%" src/AppRelease.cpp build/resources.res ^
+-lgdi32 -limm32 -luser32 -lkernel32 -ldwmapi -ld3d9 ^
     -lole32 -loleaut32 -lcomctl32 -luuid -lsetupapi ^
-    -static -municode -Wl,-subsystem,windows -Wl,-entry:WinMainCRTStartup
+    -static -municode -Wl,-subsystem,windows -mwindows
 
-if exist %TARGET% (
+if exist "%TARGET%" (
     echo ✅ Build concluído com sucesso!
     
     if exist "%ICON%" (
         echo Verificando ícone no executável...
-        dir %TARGET%
+        dir "%TARGET%"
     ) else (
         echo ⚠️ Arquivo de ícone não encontrado: %ICON%
     )

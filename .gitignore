@@ -1,0 +1,7 @@
+build
+venv
+bin
+__pycache__
+
+*.lnk
+*.pyc
